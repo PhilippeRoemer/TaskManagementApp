@@ -5,18 +5,24 @@ import axios from "axios";
 function App() {
     const [listOfProjects, setListOfProjects] = useState([]);
     const [listOfProjectsTasks, setListOfProjectsTasks] = useState([]);
-
-    const params = {
-        project: { toJSON: () => "Metro App" },
-    };
+    const [seletedProjectID, setSeletedProjectID] = useState("62b45acbf96a989f04c407ef");
 
     useEffect(() => {
-        axios.get("http://localhost:4000/getProject", { params }).then((response) => {
+        axios.get("http://localhost:4000/getProject").then((response) => {
             console.log(response.data);
             setListOfProjects(response.data);
-            setListOfProjectsTasks(response.data);
+
+            const filteredProject = response.data.filter((id) => id._id === seletedProjectID);
+
+            setListOfProjectsTasks(filteredProject);
         });
-    }, []);
+    }, [seletedProjectID]);
+
+    const selectProject = (e) => {
+        console.log(e.target.id);
+        setSeletedProjectID(e.target.id);
+    };
+
     return (
         <div>
             <div className="sidebar">
@@ -24,7 +30,9 @@ function App() {
                 {listOfProjects.map((projects) => {
                     return (
                         <div>
-                            <h3>Project: {projects.project}</h3>
+                            <h3 id={projects._id} onClick={selectProject}>
+                                {projects.project}
+                            </h3>
                         </div>
                     );
                 })}
