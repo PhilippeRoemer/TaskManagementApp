@@ -23,6 +23,10 @@ function App() {
         setSeletedProjectID(e.target.id);
     };
 
+    const updateTask = () => {};
+    const completeTask = () => {};
+    const deleteTask = () => {};
+
     return (
         <div>
             <div className="sidebar">
@@ -45,8 +49,33 @@ function App() {
                             <h3>Tasks</h3>
 
                             {projects.project_tasks.map((tasks) => {
-                                if (tasks.completed === true) {
-                                    return <div>{tasks.task}</div>;
+                                if (tasks.completed === false) {
+                                    return (
+                                        <div className="task">
+                                            <p className="taskName">{tasks.task}</p>
+                                            <button
+                                                onClick={() => {
+                                                    updateTask(projects._id);
+                                                }}
+                                            >
+                                                Update
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    completeTask(projects._id);
+                                                }}
+                                            >
+                                                Complete
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    deleteTask(projects._id);
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    );
                                 }
                             })}
                         </div>
@@ -58,8 +87,12 @@ function App() {
                     return (
                         <div className="tasks">
                             {projects.project_tasks.map((tasks) => {
-                                if (tasks.completed === false) {
-                                    return <div>{tasks.task}</div>;
+                                if (tasks.completed === true) {
+                                    return (
+                                        <div className="task">
+                                            <p>{tasks.task}</p>
+                                        </div>
+                                    );
                                 }
                             })}
                         </div>

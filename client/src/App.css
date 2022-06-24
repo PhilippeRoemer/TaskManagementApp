@@ -38,3 +38,18 @@ h3 {
     padding-left: 35px;
     padding-bottom: 15px;
 }
+
+.tasks {
+    padding-bottom: 15px;
+}
+
+.task {
+    display: flex;
+    width: 55%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.taskName {
+    width: 50%;
+}
