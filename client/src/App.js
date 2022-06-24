@@ -38,13 +38,12 @@ function App() {
                 })}
             </div>
             <div className="pageContent">
-                <h1>Project Title</h1>
-                <h3>Tasks</h3>
-
                 {listOfProjectsTasks.map((projects) => {
                     return (
                         <div className="tasks">
-                            <p>{projects.project}</p>
+                            <h1>{projects.project}</h1>
+                            <h3>Tasks</h3>
+
                             {projects.project_tasks.map((tasks) => {
                                 if (tasks.completed === true) {
                                     return <div>{tasks.task}</div>;
@@ -58,7 +57,6 @@ function App() {
                 {listOfProjectsTasks.map((projects) => {
                     return (
                         <div className="tasks">
-                            <p>{projects.project}</p>
                             {projects.project_tasks.map((tasks) => {
                                 if (tasks.completed === false) {
                                     return <div>{tasks.task}</div>;
