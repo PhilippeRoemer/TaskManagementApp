@@ -22,6 +22,7 @@ function App() {
     const selectProject = (e) => {
         console.log(e.target.id);
         setSeletedProjectID(e.target.id);
+        setToggleAdd(false);
     };
 
     const updateTask = () => {};
