@@ -6,6 +6,7 @@ function App() {
     const [listOfProjects, setListOfProjects] = useState([]);
     const [listOfProjectsTasks, setListOfProjectsTasks] = useState([]);
     const [seletedProjectID, setSeletedProjectID] = useState("62b45acbf96a989f04c407ef");
+    const [toggleAdd, setToggleAdd] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:4000/getProject").then((response) => {
@@ -26,6 +27,7 @@ function App() {
     const updateTask = () => {};
     const completeTask = () => {};
     const deleteTask = () => {};
+    const addTask = () => {};
 
     return (
         <div>
@@ -81,6 +83,29 @@ function App() {
                         </div>
                     );
                 })}
+
+                <div className="addTaskContainer">
+                    <div
+                        className="addButton"
+                        onClick={() => {
+                            setToggleAdd(!toggleAdd);
+                        }}
+                    >
+                        {!toggleAdd ? <p>+</p> : <p>-</p>}
+                    </div>
+                    {toggleAdd ? (
+                        <div>
+                            <input type="text" placeholder="Add Task" />
+                            <button
+                                onClick={() => {
+                                    addTask();
+                                }}
+                            >
+                                Add Task
+                            </button>{" "}
+                        </div>
+                    ) : null}
+                </div>
 
                 <h3>Completed Tasks</h3>
                 {listOfProjectsTasks.map((projects) => {
