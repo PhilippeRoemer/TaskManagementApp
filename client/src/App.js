@@ -46,6 +46,8 @@ function App() {
 
     const deleteProject = (e) => {
         const deleteProjectID = e.target.id;
+
+        console.log("Deleted");
         axios.delete("http://localhost:4000/deleteProject/" + deleteProjectID).then(() => {});
     };
 
@@ -61,7 +63,9 @@ function App() {
                 {listOfProjects.map((projects) => {
                     return (
                         <div>
-                            <h3 onClick={selectProject}>{projects.project}</h3>
+                            <h3 onClick={selectProject} id={projects._id}>
+                                {projects.project}
+                            </h3>
                             <button onClick={deleteProject} id={projects._id}>
                                 Delete
                             </button>
@@ -81,28 +85,32 @@ function App() {
                             {projects.project_tasks.map((tasks) => {
                                 if (tasks.completed === false) {
                                     return (
-                                        <div className="task">
-                                            <p className="taskName">{tasks.task}</p>
+                                        <div>
+                                            <div className="task">
+                                                <p className="taskName">{tasks.task}</p>
+
+                                                <button
+                                                    onClick={() => {
+                                                        completeTask(projects._id);
+                                                    }}
+                                                >
+                                                    Complete
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        deleteTask(projects._id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                            <input type="text" placeholder="Update Task" />
                                             <button
                                                 onClick={() => {
                                                     updateTask(projects._id);
                                                 }}
                                             >
                                                 Update
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    completeTask(projects._id);
-                                                }}
-                                            >
-                                                Complete
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    deleteTask(projects._id);
-                                                }}
-                                            >
-                                                Delete
                                             </button>
                                         </div>
                                     );
