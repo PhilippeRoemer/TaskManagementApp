@@ -33,9 +33,20 @@ function App() {
             .post("http://localhost:4000/createProject", {
                 project,
             })
-            .then((response) => {
+            .then(() => {
+                setListOfProjects([
+                    ...listOfProjects,
+                    {
+                        project,
+                    },
+                ]);
                 console.log("Project task created");
             });
+    };
+
+    const deleteProject = (e) => {
+        const deleteProjectID = e.target.id;
+        axios.delete("http://localhost:4000/deleteProject/" + deleteProjectID).then(() => {});
     };
 
     const updateTask = () => {};
@@ -50,9 +61,10 @@ function App() {
                 {listOfProjects.map((projects) => {
                     return (
                         <div>
-                            <h3 id={projects._id} onClick={selectProject}>
-                                {projects.project}
-                            </h3>
+                            <h3 onClick={selectProject}>{projects.project}</h3>
+                            <button onClick={deleteProject} id={projects._id}>
+                                Delete
+                            </button>
                         </div>
                     );
                 })}
