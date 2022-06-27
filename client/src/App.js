@@ -25,6 +25,19 @@ function App() {
         setToggleAdd(false);
     };
 
+    const addProject = () => {
+        const project = document.getElementById("projectID").value;
+        console.log(project);
+
+        axios
+            .post("http://localhost:4000/createProject", {
+                project,
+            })
+            .then((response) => {
+                console.log("Project task created");
+            });
+    };
+
     const updateTask = () => {};
     const completeTask = () => {};
     const deleteTask = () => {};
@@ -43,6 +56,8 @@ function App() {
                         </div>
                     );
                 })}
+                <input type="text" placeholder="Add Project" id="projectID" />
+                <button onClick={addProject}>Add Project</button>
             </div>
             <div className="pageContent">
                 {listOfProjectsTasks.map((projects) => {
